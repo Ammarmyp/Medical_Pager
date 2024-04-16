@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useState } from "react";
 import searchIcon from "../assets/SearchIcon.svg";
+import InputField from "./InputField";
 
 const ChannelSearch = () => {
   const [query, setQuery] = useState<string | null>();
@@ -23,12 +24,7 @@ const ChannelSearch = () => {
           <img  src={searchIcon} alt="Search Icon" />
         </div>
 
-        <input
-          className="  bg-inherit w-full h-full  border-slate-500 outline-none text-white rounded-md text-[16px] block p-1.5  "
-          type="text"
-          placeholder="Search"
-          onChange={onSearch}
-        />
+       <InputField/>
       </div>
     </div>
   );

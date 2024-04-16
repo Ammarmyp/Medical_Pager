@@ -9,32 +9,25 @@ const ChannelListContainer = () => {
   return (
     <>
       <SideBar />
-      {/* channel-list__list_wrapper */}
       <div className=" lg:flex flex-col w-[240px] bg-[#005fff]">
         <Header />
         <ChannelSearch />
         <ChannelList
           filters={{}}
           channelRenderFilterFn={() => {}}
-          List={(listProps) => <TeamChannelList {...listProps} type="team"  />}
-
+          List={(listProps) => <TeamChannelList {...listProps} type="team" />}
           Preview={(previewProps) => (
-            <TeamChannelPreview
-            {...previewProps}
-            type='team'
-            />
+            <TeamChannelPreview {...previewProps} type="team" />
           )}
         />
         <ChannelList
           filters={{}}
           channelRenderFilterFn={() => {}}
-          List={(listProps) => <TeamChannelList {...listProps} type="messaging"  />}
-
+          List={(listProps) => (
+            <TeamChannelList {...listProps} type="messaging" />
+          )}
           Preview={(previewProps) => (
-            <TeamChannelPreview
-            {...previewProps}
-            type='messaging'
-            />
+            <TeamChannelPreview {...previewProps} type="messaging" />
           )}
         />
       </div>
