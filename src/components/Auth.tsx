@@ -2,6 +2,10 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import signInImage from "../assets/signup.jpg";
 import Button from "./Button";
 import InputField from "./InputField";
+import { useMutation } from "@tanstack/react-query";
+import useAuth from "../hooks/useAuth";
+import axios from "axios";
+import Cookies from "universal-cookie";
 
 const initialState = {
   fullName: "",
@@ -11,6 +15,13 @@ const initialState = {
   phoneNumber: "",
   avatarURL: "",
 };
+
+interface ResponseDataType {
+  token: string;
+  userId: string;
+  hashedPassword: string;
+}
+const cookies = new Cookies();
 
 const Auth = () => {
   const [form, setForm] = useState(initialState);
@@ -23,9 +34,33 @@ const Auth = () => {
     setIsSignup((previousSignup) => !previousSignup);
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    console.log(form);
+    const { fullName, userName, password, phoneNumber, avatarURL } = form;
+    const URL = "http://localhost:5000/auth";
+
+    const endpoint = `${isSignup ? "signup" : "login"}`;
+    const {
+      data: { token, userId, hashedPassword },
+    } = await axios.post<ResponseDataType>(`${URL}/${endpoint}`, {
+      userName,
+      password,
+      fullName,
+      phoneNumber,
+      avatarURL,
+    });
+    cookies.set("token", token);
+    cookies.set("userName", userName);
+    cookies.set("fullName", fullName);
+    cookies.set("userId", userId);
+
+    if (isSignup) {
+      cookies.set("phoneNumber", phoneNumber);
+      cookies.set("avatarURL", avatarURL);
+      cookies.set("hashedPassword", hashedPassword);
+    }
+
+    window.location.reload();
   };
 
   return (
