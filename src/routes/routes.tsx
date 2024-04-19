@@ -1,22 +1,16 @@
 import { createBrowserRouter } from "react-router-dom";
-import SignIn from "../components/SignIn";
-import SignUp from "../components/SignUp";
-import Authentication from "../pages/Authentication";
-import ChannelListContainer from "../components/ChannelListContainer";
-import ContextWrapper from "../components/ContextWrapper";
+import App from "../App";
 import Auth from "../components/Auth";
+import ChannelListContainer from "../components/ChannelListContainer";
+import Authentication from "../pages/Authentication";
 
 const router = createBrowserRouter([
   {
-    element: <ContextWrapper />,
+    element: <App />,
     children: [
       {
-        path: "/",
         element: <Authentication />,
-        children: [
-          { path: "/login", element: <SignIn /> },
-          { path: "/signup", element: <Auth /> },
-        ],
+        children: [{ path: "/", element: <Auth /> }],
       },
       { path: "/channelListContainer", element: <ChannelListContainer /> },
     ],

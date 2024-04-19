@@ -1,11 +1,9 @@
+import axios from "axios";
 import { ChangeEvent, FormEvent, useState } from "react";
+import Cookies from "universal-cookie";
 import signInImage from "../assets/signup.jpg";
 import Button from "./Button";
 import InputField from "./InputField";
-import { useMutation } from "@tanstack/react-query";
-import useAuth from "../hooks/useAuth";
-import axios from "axios";
-import Cookies from "universal-cookie";
 
 const initialState = {
   fullName: "",
@@ -17,9 +15,12 @@ const initialState = {
 };
 
 interface ResponseDataType {
-  token: string;
+  userToken: string;
   userId: string;
   hashedPassword: string;
+  fullName: string;
+  userName: string;
+  phoneNumber: string;
 }
 const cookies = new Cookies();
 
@@ -40,27 +41,35 @@ const Auth = () => {
     const URL = "http://localhost:5000/auth";
 
     const endpoint = `${isSignup ? "signup" : "login"}`;
-    const {
-      data: { token, userId, hashedPassword },
-    } = await axios.post<ResponseDataType>(`${URL}/${endpoint}`, {
-      userName,
-      password,
-      fullName,
-      phoneNumber,
-      avatarURL,
-    });
-    cookies.set("token", token);
-    cookies.set("userName", userName);
-    cookies.set("fullName", fullName);
-    cookies.set("userId", userId);
-
-    if (isSignup) {
-      cookies.set("phoneNumber", phoneNumber);
-      cookies.set("avatarURL", avatarURL);
-      cookies.set("hashedPassword", hashedPassword);
-    }
-
-    window.location.reload();
+    axios
+      .post<ResponseDataType>(`${URL}/${endpoint}`, {
+        userName,
+        password,
+        fullName,
+        phoneNumber,
+        avatarURL,
+      })
+      .then((res) => {
+        const {
+          userToken,
+          userId,
+          hashedPassword,
+          userName,
+          fullName,
+          phoneNumber,
+        } = res.data;
+        cookies.set("userToken", userToken);
+        // console.log(cookies.get("userToken"));
+        cookies.set("userName", userName);
+        cookies.set("fullName", fullName);
+        cookies.set("userId", userId);
+        if (isSignup) {
+          cookies.set("phoneNumber", phoneNumber);
+          cookies.set("avatarURL", avatarURL);
+          cookies.set("hashedPassword", hashedPassword);
+        }
+      })
+      .catch((err: Error) => console.log(err.message, err));
   };
 
   return (
