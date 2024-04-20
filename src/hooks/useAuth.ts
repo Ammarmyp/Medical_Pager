@@ -1,52 +1,53 @@
-import { useContext } from "react";
-import Authcontext from "../context/AuthContext";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import Cookies from "universal-cookie";
 
-interface FormType {
-    fullName?: string;
-  userName: string;
-  password: string;
-  confirmPassword?: string;
-  phoneNumber?: string;
-  avatarURL?: string;
-}
-
-interface Props {
-    authEndpoint: string;
-    form: FormType;
-}
+interface FormData {
+    fullName?: string,
+    userName: string,
+    password: string,
+    confirmPassword?: string,
+    phoneNumber?: string,
+    avatarURL?: string,
+};
 
 interface ResponseDataType {
-    token: string,
-    userId: string,
-    hashedPassword: string,
+    userToken: string;
+    userId: string;
+    hashedPassword: string;
+    fullName: string;
+    userName: string;
+    phoneNumber: string;
 }
 
 const cookies = new Cookies();
 
-const URL = 'http://localhost:5000/auth';
-const useAuth = ( authEndpoint: string, form: FormType ) => 
+const useAuth = (isSignup: boolean) =>  useMutation({
+    mutationFn: (formData: FormData) => {
+        const URL = "http://localhost:5000/auth";
+        const endpoint = isSignup ? "signup" : "login";
+        
+        return axios.post<ResponseDataType>(`${URL}/${endpoint}`, formData)
+            .then((res) => {
+                const { userToken, userId, hashedPassword, userName, fullName, phoneNumber } = res.data;
 
- useMutation({
+                cookies.set("userToken", userToken);
+                cookies.set("userName", userName);
+                cookies.set("fullName", fullName);
+                cookies.set("userId", userId);
+                
+                if (isSignup) {
+                    cookies.set("phoneNumber", phoneNumber);
+                    cookies.set("avatarURL", formData.avatarURL || ''); 
+                    cookies.set("hashedPassword", hashedPassword);
+                }
 
-    mutationFn: async  () => {
-        return axios.post<ResponseDataType>(`${URL}/${authEndpoint}`, { form })
-        .then( res => { 
-            const  { token, userId, hashedPassword } = res.data;
-            cookies.set('token', token);
-            cookies.set('userName', form.userName);
-            cookies.set('fullName', form.fullName);
-            cookies.set('userId', userId);
-
-            
-          
-        }
-        )
-    }
-
-    
+                return res.data;
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+    },
 });
 
 export default useAuth;

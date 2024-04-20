@@ -4,6 +4,8 @@ import Cookies from "universal-cookie";
 import signInImage from "../assets/signup.jpg";
 import Button from "./Button";
 import InputField from "./InputField";
+import { useMutation } from "@tanstack/react-query";
+import useAuth from "../hooks/useAuth";
 
 const initialState = {
   fullName: "",
@@ -27,6 +29,7 @@ const cookies = new Cookies();
 const Auth = () => {
   const [form, setForm] = useState(initialState);
   const [isSignup, setIsSignup] = useState(true);
+  const mutation = useAuth(isSignup);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -37,41 +40,8 @@ const Auth = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const { fullName, userName, password, phoneNumber, avatarURL } = form;
-    const URL = "http://localhost:5000/auth";
-
-    const endpoint = `${isSignup ? "signup" : "login"}`;
-    axios
-      .post<ResponseDataType>(`${URL}/${endpoint}`, {
-        userName,
-        password,
-        fullName,
-        phoneNumber,
-        avatarURL,
-      })
-      .then((res) => {
-        const {
-          userToken,
-          userId,
-          hashedPassword,
-          userName,
-          fullName,
-          phoneNumber,
-        } = res.data;
-        cookies.set("userToken", userToken);
-        // console.log(cookies.get("userToken"));
-        cookies.set("userName", userName);
-        cookies.set("fullName", fullName);
-        cookies.set("userId", userId);
-        if (isSignup) {
-          cookies.set("phoneNumber", phoneNumber);
-          cookies.set("avatarURL", avatarURL);
-          cookies.set("hashedPassword", hashedPassword);
-        }
-      })
-      .catch((err: Error) => console.log(err.message, err));
+    mutation.mutate(form);
   };
-
   return (
     <div>
       <div className="gap-4 flex flex-col-reverse md:flex-row justify-center items-center min-h-screen bg-gray-100 ">
