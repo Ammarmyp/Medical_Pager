@@ -1,11 +1,8 @@
-import axios from "axios";
 import { ChangeEvent, FormEvent, useState } from "react";
-import Cookies from "universal-cookie";
 import signInImage from "../assets/signup.jpg";
+import useAuth from "../hooks/useAuth";
 import Button from "./Button";
 import InputField from "./InputField";
-import { useMutation } from "@tanstack/react-query";
-import useAuth from "../hooks/useAuth";
 
 const initialState = {
   fullName: "",
@@ -15,16 +12,6 @@ const initialState = {
   phoneNumber: "",
   avatarURL: "",
 };
-
-interface ResponseDataType {
-  userToken: string;
-  userId: string;
-  hashedPassword: string;
-  fullName: string;
-  userName: string;
-  phoneNumber: string;
-}
-const cookies = new Cookies();
 
 const Auth = () => {
   const [form, setForm] = useState(initialState);
