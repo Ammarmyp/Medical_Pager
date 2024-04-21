@@ -1,7 +1,11 @@
+import Cookies from "universal-cookie";
 import hospital from "../assets/hospital.png";
 import logout from "../assets/logout.png";
 
-const SideBar = () => {
+interface Props {
+  logOut: () => void;
+}
+const SideBar = ({ logOut }: Props) => {
   return (
     // provide background and box shadow
     //channel-list__sidebar
@@ -17,7 +21,10 @@ const SideBar = () => {
       {/* channel-list__sidebar__icon2 */}
       <div className="cursor-pointer w-[44px] h-[44px] m-[14px]  rounded-[9999px] ">
         {/* icon2__inner */}
-        <div className="h-full flex items-center justify-center ">
+        <div
+          className="h-full flex items-center justify-center "
+          onClick={logOut}
+        >
           <img src={logout} alt="Logout" width="30" />
         </div>
       </div>
