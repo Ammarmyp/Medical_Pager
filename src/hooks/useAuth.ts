@@ -41,13 +41,14 @@ const useAuth = (isSignup: boolean) =>  useMutation({
                     cookies.set("avatarURL", formData.avatarURL || ''); 
                     cookies.set("hashedPassword", hashedPassword);
                 }
-
+                window.location.reload();
                 return res.data;
             })
             .catch((error) => {
                 console.log(error)
             });
     },
+
 });
 
 export default useAuth;

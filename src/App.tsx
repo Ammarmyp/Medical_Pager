@@ -4,6 +4,8 @@ import Cookies from "universal-cookie";
 import Auth from "./components/Auth";
 import ChannelContainer from "./components/ChannelContainer";
 import ChannelListContainer from "./components/ChannelListContainer";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 // import "./App.css"
 
 const cookies = new Cookies();
@@ -13,7 +15,6 @@ const client = StreamChat.getInstance(apiKey);
 const authToken = cookies.get("userToken");
 const full = cookies.get("fullName");
 console.log(full);
-
 if (authToken) {
   client.connectUser(
     {
@@ -31,6 +32,7 @@ console.log(cookies.get("userId"));
 console.log(authToken);
 
 function App() {
+  const [isLogged, setIsLogged] = useState(false);
   if (!authToken) return <Auth />;
   return (
     //add box shadow on this div
