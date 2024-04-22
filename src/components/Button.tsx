@@ -10,7 +10,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(
     return (
       <>
         <button
-          className={`border-1 bg-blue-500 p-2 m-2  rounded-md text-white hover:bg-blue-600 transition-colors focus:bg-blue-400 disabled:bg-gray-600 ${className}`}
+          className={`border-1 bg-blue-700 p-2 m-2  rounded-md text-white hover:bg-[#1c4f66]  duration-300 focus:bg-blue-600 disabled:bg-gray-600 ${className}`}
           {...rest}
           ref={ref}
         >
