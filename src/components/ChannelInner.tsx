@@ -7,6 +7,7 @@ import {
 } from "stream-chat-react";
 import GiphyContext from "../context/gyphyContext";
 import TeamChannelHeader from "./TeamChannelHeader";
+import MessageChannelHeader from "./MessageList/MessageChannelHeader";
 
 const ChannelInner = () => {
   const [giphyState, setGiphyState] = useState(false);
@@ -33,14 +34,12 @@ const ChannelInner = () => {
 
   return (
     <GiphyContext.Provider value={{ giphyState, setGiphyState }}>
-      <div style={{ display: "flex", width: "100%" }}>
-        <Window>
-          <TeamChannelHeader />
-          <MessageList />
-          <MessageInput overrideSubmitHandler={overrideSubmitHandler} />
-        </Window>
-        <Thread />
-      </div>
+      <Window>
+        <MessageChannelHeader />
+        <MessageList />
+        <MessageInput overrideSubmitHandler={overrideSubmitHandler} />
+      </Window>
+      <Thread />
     </GiphyContext.Provider>
   );
 };

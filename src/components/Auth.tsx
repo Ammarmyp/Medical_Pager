@@ -35,7 +35,7 @@ const Auth = () => {
     mutation.mutate(form);
   };
 
-  const inputFieldCustomDesign = "bg-[#1C5D7B] border-0 border-b-2";
+  const inputFieldCustomDesign = " bg-[#1C5D7B] border-0 border-b-2";
 
   return (
     <div className="flex flex-col md:flex-row justify-center items-center min-h-screen bg-[#1C5D7B] gap-3 px-4">

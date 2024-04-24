@@ -14,7 +14,7 @@ const InputField = forwardRef<HTMLInputElement, Props>(
       <input
         {...rest}
         ref={ref}
-        className={` p-1 m-2 border-[1.6px] border-gray-500 focus:border-blue-400 outline-none rounded-md w-full ${className}`}
+        className={` p-1 m-2  border-gray-500 focus:border-blue-400 outline-none rounded-md w-full ${className}`}
       />
     );
   }

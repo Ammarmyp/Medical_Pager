@@ -6,6 +6,8 @@ import { Channel, MessageSimple } from "stream-chat-react";
 import EmptyState from "./EmptyState";
 import TeamMessage from "./TeamMessage";
 import ChannelInner from "./ChannelInner";
+import CustomDateSeparator from "./MessageList/CustomDateSeparator";
+import MessageChannelHeader from "./MessageList/MessageChannelHeader";
 
 const ChannelContainer = () => {
   const { isCreating, isEditing } = useContext(ChannelContext);
@@ -31,6 +33,8 @@ const ChannelContainer = () => {
         Message={(messageProps, i) => (
           <MessageSimple key={i} {...messageProps} />
         )}
+        DateSeparator={CustomDateSeparator}
+        // HeaderComponent={MessageChannelHeader}
       >
         <ChannelInner />
       </Channel>
