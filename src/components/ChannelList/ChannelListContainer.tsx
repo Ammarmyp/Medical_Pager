@@ -1,9 +1,9 @@
 import { ChannelList } from "stream-chat-react";
-import ChannelSearch from "./ChannelSearch";
-import Header from "./Header";
-import SideBar from "./SideBar";
+import ChannelSearch from "../ChannelSearch";
+import Header from "../Header";
+import SideBar from "../SideBar";
 import TeamChannelList from "./TeamChannelList";
-import TeamChannelPreview from "./TeamChannelPreview";
+import TeamChannelPreview from "../TeamChannelPreview";
 import Cookies from "universal-cookie";
 
 const cookies = new Cookies();
@@ -28,7 +28,7 @@ const ChannelListContainer = () => {
         <ChannelSearch />
         <ChannelList
           filters={{}}
-          channelRenderFilterFn={() => {}}
+          // channelRenderFilterFn={() => {}}
           List={(listProps) => <TeamChannelList {...listProps} type="team" />}
           Preview={(previewProps) => (
             <TeamChannelPreview {...previewProps} type="team" />

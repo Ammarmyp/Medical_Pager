@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import { Thread, Window } from "stream-chat-react";
+import { useState } from "react";
 import {
-  useChannelActionContext,
-  MessageList,
   MessageInput,
+  MessageList,
+  Thread,
+  Window,
+  useChannelActionContext,
 } from "stream-chat-react";
-import GiphyContext from "../context/gyphyContext";
-import TeamChannelHeader from "./TeamChannelHeader";
-import MessageChannelHeader from "./MessageList/MessageChannelHeader";
+import GiphyContext from "../../context/gyphyContext";
+import MessageChannelHeader from "../MessageList/MessageChannelHeader";
 
 const ChannelInner = () => {
   const [giphyState, setGiphyState] = useState(false);

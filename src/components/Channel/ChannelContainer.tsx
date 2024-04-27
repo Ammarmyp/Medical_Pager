@@ -1,13 +1,11 @@
-import React, { useContext } from "react";
-import ChannelContext from "../context/channelStateContext";
-import CreateChannel from "./CreateChannel";
-import EditChannel from "./EditChannel";
+import { useContext } from "react";
 import { Channel, MessageSimple } from "stream-chat-react";
-import EmptyState from "./EmptyState";
-import TeamMessage from "./TeamMessage";
+import ChannelContext from "../../context/channelStateContext";
+import CreateChannel from "../CreateChannel";
+import EditChannel from "../EditChannel";
+import CustomDateSeparator from "../MessageList/CustomDateSeparator";
 import ChannelInner from "./ChannelInner";
-import CustomDateSeparator from "./MessageList/CustomDateSeparator";
-import MessageChannelHeader from "./MessageList/MessageChannelHeader";
+import EmptyState from "./EmptyState";
 
 const ChannelContainer = () => {
   const { isCreating, isEditing } = useContext(ChannelContext);
@@ -27,12 +25,12 @@ const ChannelContainer = () => {
     );
 
   return (
-    <div>
+    <div className="h-[100vh] ">
       <Channel
         EmptyStateIndicator={EmptyState}
-        Message={(messageProps, i) => (
-          <MessageSimple key={i} {...messageProps} />
-        )}
+        // Message={(messageProps, i) => (
+        //   <MessageSimple key={i} {...messageProps} />
+        // )}
         DateSeparator={CustomDateSeparator}
         // HeaderComponent={MessageChannelHeader}
       >

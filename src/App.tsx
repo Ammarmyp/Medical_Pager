@@ -1,14 +1,19 @@
+import { useState } from "react";
 import { StreamChat } from "stream-chat";
-import { Chat } from "stream-chat-react";
+import {
+  ChannelList,
+  ChannelSearch,
+  Chat,
+  CustomClasses,
+} from "stream-chat-react";
 import Cookies from "universal-cookie";
-import Auth from "./components/Auth";
-import ChannelContainer from "./components/ChannelContainer";
-import ChannelListContainer from "./components/ChannelListContainer";
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import ChannelContext from "./context/channelStateContext";
 import "../node_modules/stream-chat-react/dist/css/index.css";
-// import "./App.css"
+import Auth from "./components/Auth";
+import ChannelContainer from "./components/Channel/ChannelContainer";
+import Header from "./components/Header";
+import SideBar from "./components/SideBar";
+import ChannelContext from "./context/channelStateContext";
+import "./App.css";
 
 const cookies = new Cookies();
 const apiKey = "y4afy447uz25";
@@ -37,6 +42,12 @@ function App() {
   const [createType, setCreateType] = useState("");
   const [isCreating, setIsCreating] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [theme, setTheme] = useState("light-dark");
+
+  const customClasses: CustomClasses = {
+    chat: " h-full",
+    channel: "h-full",
+  };
 
   if (!authToken) return <Auth />;
   return (
@@ -52,12 +63,27 @@ function App() {
           setIsEditing,
         }}
       >
-        <div className="flex flex-1 h-[100vh] ">
-          <Chat client={client} theme="team light">
-            <ChannelListContainer />
-            <ChannelContainer />
+        <div className="flex flex-1  ">
+          <Chat
+            client={client}
+            theme={`team ${theme}`}
+            // customClasses={customClasses}
+          >
+            {/* <ChannelListContainer /> */}
+            <SideBar />
+            <div className="felx flex-col ">
+              <Header />
+              <ChannelSearch />
+              <div className="w-[25%]">
+                <ChannelList />
+              </div>
+            </div>
+            <div className="w-full ">
+              <ChannelContainer />
+            </div>
           </Chat>
         </div>
+        {/* <div className="bg-red-600 h-10 w-full"></div> */}
       </ChannelContext.Provider>
     </>
   );

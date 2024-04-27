@@ -1,11 +1,13 @@
 import Cookies from "universal-cookie";
 import hospital from "../assets/hospital.png";
 import logout from "../assets/logout.png";
+import useLogOut from "../hooks/useLogOut";
 
 interface Props {
   logOut: () => void;
 }
-const SideBar = ({ logOut }: Props) => {
+const SideBar = () => {
+  const logOut = useLogOut();
   return (
     // provide background and box shadow
     //channel-list__sidebar
