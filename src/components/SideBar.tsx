@@ -1,17 +1,14 @@
-import Cookies from "universal-cookie";
 import hospital from "../assets/hospital.png";
 import logout from "../assets/logout.png";
-import useLogOut from "../hooks/useLogOut";
 
 interface Props {
   logOut: () => void;
 }
 const SideBar = () => {
-  const logOut = useLogOut();
   return (
     // provide background and box shadow
     //channel-list__sidebar
-    <div className="hidden sm:block w-[72px] bg-[#1154c7]">
+    <div className="hidden sm:block w-[72px] bg-[#1154c7] h-full">
       {/* channel-list__sidebar__icon1 */}
       <div className="w-[44px] h-[44px] m-[14px]  rounded-[9999px] ">
         {/* icon1_inner */}
@@ -25,7 +22,7 @@ const SideBar = () => {
         {/* icon2__inner */}
         <div
           className="h-full flex items-center justify-center "
-          onClick={logOut}
+          onClick={() => console.log("logging out")}
         >
           <img src={logout} alt="Logout" width="30" />
         </div>

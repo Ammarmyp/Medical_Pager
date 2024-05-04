@@ -1,11 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import signInImage from "../assets/signup.jpg";
 import doctorImage from "../assets/doctorBoss.jpg";
-import useAuth from "../hooks/useAuth";
 import Button from "../components/Button";
 import InputField from "../components/InputField";
-import { Navigate, useNavigate } from "react-router-dom";
-import useAuthConnectUser from "../hooks/useAuthConnectUser";
 
 const initialState = {
   fullName: "",
@@ -19,8 +15,6 @@ const initialState = {
 const Auth = () => {
   const [form, setForm] = useState(initialState);
   const [isSignup, setIsSignup] = useState(true);
-  const mutation = useAuth(isSignup);
-  const { authToken } = useAuthConnectUser();
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -34,8 +28,6 @@ const Auth = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    mutation.mutate(form);
-    if (authToken) return <Navigate to="auth" />;
   };
 
   const inputFieldCustomDesign = " bg-[#1C5D7B] border-0 border-b-2";

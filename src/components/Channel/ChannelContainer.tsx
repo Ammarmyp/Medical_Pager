@@ -1,8 +1,6 @@
 import { useContext } from "react";
-import { Channel, MessageSimple } from "stream-chat-react";
+import { Channel } from "stream-chat-react";
 import ChannelContext from "../../context/channelStateContext";
-import CreateChannel from "../CreateChannel";
-import EditChannel from "../EditChannel";
 import CustomDateSeparator from "../MessageList/CustomDateSeparator";
 import ChannelInner from "./ChannelInner";
 import EmptyState from "./EmptyState";
@@ -10,19 +8,9 @@ import EmptyState from "./EmptyState";
 const ChannelContainer = () => {
   const { isCreating, isEditing } = useContext(ChannelContext);
 
-  if (isCreating)
-    return (
-      <div>
-        <CreateChannel />
-      </div>
-    );
+  if (isCreating) return <div>Creating Channel</div>;
 
-  if (isEditing)
-    return (
-      <div>
-        <EditChannel />
-      </div>
-    );
+  if (isEditing) return <div>Editing</div>;
 
   return (
     <div className="h-[100vh] ">
