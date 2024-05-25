@@ -1,31 +1,26 @@
-import hospital from "../assets/hospital.png";
-import logout from "../assets/logout.png";
-
-interface Props {
-  logOut: () => void;
-}
 const SideBar = () => {
   return (
-    // provide background and box shadow
-    //channel-list__sidebar
-    <div className="hidden sm:block w-[72px] bg-[#1154c7] h-full">
-      {/* channel-list__sidebar__icon1 */}
-      <div className="w-[44px] h-[44px] m-[14px]  rounded-[9999px] ">
-        {/* icon1_inner */}
-        <div className="h-full flex items-center justify-center">
-          <img width="30" src={hospital} alt="Hospital" />
+    <div className="hidden sm:block w-[195px] py-2 px-2 rounded bg-[#1E1E1E] opacity-55 shadow-sm m-1 h-full  flex-col">
+      <div className="flex justify-between p-1 items-center border-b-[1px] border-slate-600 pb-4 mb-4">
+        <div className="avatar">
+          <div className="w-20 rounded-full">
+            <img src="https://plus.unsplash.com/premium_photo-1671581559476-10b8a92ffb77?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+          </div>
         </div>
+        <h1 className="text-xl ml-1">Lets Chat!</h1>
       </div>
-
-      {/* channel-list__sidebar__icon2 */}
-      <div className="cursor-pointer w-[44px] h-[44px] m-[14px]  rounded-[9999px] ">
-        {/* icon2__inner */}
-        <div
-          className="h-full flex items-center justify-center "
-          onClick={() => console.log("logging out")}
-        >
-          <img src={logout} alt="Logout" width="30" />
-        </div>
+      <div>
+        <p className="y-2 p-1 text-[18px] font-semibold">Types</p>
+      </div>
+      <div className="p-1 ">
+        {["Team", "Direct Messages"].map((type, index) => (
+          <p
+            key={index}
+            className="my-2 p-1  rounded-lg hover:bg-[#3C3C3C] transition-all duration-200"
+          >
+            {type}
+          </p>
+        ))}
       </div>
     </div>
   );
