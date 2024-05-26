@@ -22,6 +22,7 @@ const SideBar = () => {
           </p>
         ))}
       </div>
+      <div>Profile, Theme and logout section</div>
     </div>
   );
 };
