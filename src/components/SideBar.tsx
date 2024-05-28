@@ -1,6 +1,6 @@
 const SideBar = () => {
   return (
-    <div className="hidden sm:block w-[195px] py-2 px-2 rounded bg-[#1E1E1E] opacity-55 shadow-sm m-1 h-full  flex-col">
+    <div className="hidden sm:flex flex-col w-[195px] py-2 px-2 rounded bg-[#1E1E1E] opacity-55 shadow-sm m-1 h-full">
       <div className="flex justify-between p-1 items-center border-b-[1px] border-slate-600 pb-4 mb-4">
         <div className="avatar">
           <div className="w-20 rounded-full">
@@ -9,20 +9,22 @@ const SideBar = () => {
         </div>
         <h1 className="text-xl ml-1">Lets Chat!</h1>
       </div>
-      <div>
-        <p className="y-2 p-1 text-[18px] font-semibold">Types</p>
+      <div className="flex-grow">
+        <div className="flex flex-col">
+          <p className="y-2 p-1 text-[18px] font-semibold">Types</p>
+          <div className="p-1">
+            {["Team", "Direct Messages"].map((type, index) => (
+              <p
+                key={index}
+                className="my-2 p-1 rounded-lg hover:bg-[#3C3C3C] transition-all duration-200"
+              >
+                {type}
+              </p>
+            ))}
+          </div>
+        </div>
       </div>
-      <div className="p-1 ">
-        {["Team", "Direct Messages"].map((type, index) => (
-          <p
-            key={index}
-            className="my-2 p-1  rounded-lg hover:bg-[#3C3C3C] transition-all duration-200"
-          >
-            {type}
-          </p>
-        ))}
-      </div>
-      <div>Profile, Theme and logout section</div>
+      <div className="p-1">Profile, Theme, and logout section</div>
     </div>
   );
 };
