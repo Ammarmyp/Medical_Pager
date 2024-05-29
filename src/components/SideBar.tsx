@@ -1,3 +1,5 @@
+import CustomAvatar from "./Avatar";
+
 const SideBar = () => {
   return (
     <div className="hidden sm:flex flex-col w-[195px] py-2 px-2 rounded bg-[#1E1E1E] opacity-55 shadow-sm m-1 h-full">
@@ -24,7 +26,12 @@ const SideBar = () => {
           </div>
         </div>
       </div>
-      <div className="p-1">Profile, Theme, and logout section</div>
+      <div className="p-1">
+        <p> Theme, and logout section</p>
+        <div className=" p-2 m-1">
+          <CustomAvatar />
+        </div>
+      </div>
     </div>
   );
 };
